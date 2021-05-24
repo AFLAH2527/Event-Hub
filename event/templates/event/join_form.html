@@ -1,0 +1,11 @@
+{% extends "event/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h4>Choose Event Title!  Register for the Event!</h4>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="submit" name="Join">
+</form>
+
+{% endblock  %}
