@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="{% static 'event/main.css' %}">
+    <link rel="icon" href="{% static 'event/logo.jpg' %}">
 
     {% if title %}
             <title>Event-STATion - {{ title }}</title>
@@ -60,17 +61,17 @@
           </div>
           <div class="col-md-4">
             <div class="content-section">
-              <h3>ANNOUNCEMENTS !</h3>
+              <h3> Events !</h3>
               <p class='text-muted'>
                 <ul class="list-group">
                   {% if user.is_authenticated %}
                   <li class="list-group-item list-group-item-light"><a class="article-title" href="{% url 'join-event' %}">Register for an Event</a></li>
-                  <li class="list-group-item list-group-item-light"><a class="article-title" href="{% url 'events' %}">Upcoming Events</a></li>
+                  <li class="list-group-item list-group-item-light"><a class="article-title" href="{% url 'user-events' user.username %}">Registered Events</a></li>
                   <li class="list-group-item list-group-item-light"><a class="article-title" href="#">Schedule</a></li>
                   <li class="list-group-item list-group-item-light"><a class="article-title" href="#">etc</a></li>
                   {% else %}
                   <li class="list-group-item list-group-item-light"><a class="article-title" href="{% url 'login' %}">Register for an Event</a></li>
-                  <li class="list-group-item list-group-item-light"><a class="article-title" href="{% url 'login' %}">Upcoming Events</a></li>
+                  <li class="list-group-item list-group-item-light"><a class="article-title" href="{% url 'login' %}">Registered Events</a></li>
                   <li class="list-group-item list-group-item-light"><a class="article-title" href="#">Schedule</a></li>
                   <li class="list-group-item list-group-item-light"><a class="article-title" href="#">etc</a></li>
                   {% endif %}

@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.contrib.auth.signals import user_logged_in
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Post
-from .forms import JoinForm
+from .models import Post, Join
 
 # Create your views here.
 def home(request):
@@ -19,6 +20,16 @@ class PostListView(ListView):
     context_object_name = 'posts'
     ordering = ['date_time']
     paginate_by = 3 
+
+class UserEventListView(ListView):
+    model = Join
+    template_name = 'event/join_list.html' # <app>/<model>_<viewtype>.html
+    context_object_name = 'events'
+    paginate_by = 3 
+
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Join.objects.filter(username=user)
 
 
 class PostDetailView(DetailView):
@@ -61,22 +72,17 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return False
 
 
-def joinEvent(request):
-    form = JoinForm()
-    if request.method == 'POST':
-        form = JoinForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('/events/')
-
-    context = {'form':form}
-    return render(request, 'event/join_form.html', context)
-
 
 def about(request):
     return render(request, 'event/about.html', {'title': 'About'})
 
-@login_required
-def events(request):
-    return render(request, 'event/events.html')
 
+
+class JoinEventView(LoginRequiredMixin, CreateView):
+    model = Join
+    fields = ['title', 'name', 'email', 'phone', 'place']
+    template_name = 'event/join_form.html'
+
+    def form_valid(self, form):
+        form.instance.username = self.request.user
+        return super().form_valid(form)

@@ -1,17 +1,16 @@
 {% extends "event/base.html" %}
 {% block content %}
-    {% for post in posts %}
+    <h2 class="mb-3">Registered Events ({{ page_obj.paginator.count }})</h2>  
+    {% for post in events %}
     <article class="media content-section">
-      <img class="rounded-circle article-img" src="{{ post.banner.url }}" alt="">
+      <img class="rounded-circle article-img" src="{{ post.title.banner.url }}" alt="">
         <div class="media-body">
-          <div class="article-metadata">
-          <h6>{{ post.category }}</h6>
-          </div>
-          <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
-          <h5>{{ post.date_time|date:"d N,o" }} | {{ post.date_time|date:"f A" }}</h5>
-          <h6>Location: {{ post.location }}</h6>
+          
+            <h2><a class="article-title" href="{% url 'post-detail' post.title.id %}">{{ post.title }}</a></h2>
+            <h5>{{ post.title.date_time|date:"d N,o" }} | {{ post.title.date_time|date:"f A" }}</h5>
+          
         </div>
-      </article>
+    </article>
     {% endfor %}
     {% if is_paginated %}
     <h5>< <   More Events  > ></h5>

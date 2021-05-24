@@ -27,3 +27,7 @@ class Join(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length=15)
     place = models.CharField(max_length=20)
+    username = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def get_absolute_url(self):
+        return reverse('user-events', kwargs={'username': self.username})

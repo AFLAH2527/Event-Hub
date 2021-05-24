@@ -8,11 +8,11 @@
           </div>
           <h2 class="article-title">{{ object.title }}</h2>
           <h5>{{ object.date_time|date:"d N,o" }} | {{ object.date_time|date:"f A" }}</h5>
-          <h6>Location: <a class="article-title" href="#">{{ object.location }}</a></h6>
+          <h6>Location: {{ object.location }}</h6>
           <p class="article-content">{{ object.content }}</p>
           <div class="article-metadata">
           </div>
-          Event Host: <a class="mr-2" href="#">{{ object.author }}</a>
+          Event Host: {{ object.author }}
           {% if object.author == user %}
           <div>
             <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>
