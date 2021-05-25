@@ -131,7 +131,5 @@ dmypy.json
 # Editor
 .vscode
 
-# Media files
-media/
 
 secret_settings.py
