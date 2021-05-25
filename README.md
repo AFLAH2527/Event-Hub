@@ -19,6 +19,7 @@ https://www.loom.com/share/ee8d9b7e162f4e5b85dbb04a0afb2f7e
 2. Embed video of project demo
 ## Libraries used
 Django==2.2.13
+Pillow==8.2.0
 django-betterforms==1.2
 django-ckeditor==6.0.0
 django-crispy-forms==1.11.2
@@ -28,7 +29,9 @@ django-mapbox-location-field==1.7.3
 ## How to configure
 1. Clone This Project `git clone https://github.com/AFLAH2527/Event-Hub.git`
 2. Go to Project Directory `cd Event-Hub
-5. Install Requirements Package `pip install -r requirements.txt`
-6. Migrate Database `python manage.py migrate`
-7. Create Super User `python manage.py createsuperuser`
-8. Finally Run The Project `python manage.py runserver`
+5. Install Requirements Package 
+    `pip install -r requirements.txt`
+    OR just the Libraries Used
+7. Migrate Database `python manage.py migrate`
+8. Create Super User `python manage.py createsuperuser`
+9. Finally Run The Project `python manage.py runserver`
